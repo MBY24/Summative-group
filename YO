@@ -21,11 +21,11 @@ class Member:
 
      # finding the shortest path using the breadth-first search (BFS) algorithm
     def shortest_path(self, end):
-        queue = [(self, 0)] 
+        node_distance_list = [(self, 0)] 
         visited = []  
 
-        while queue:
-            current, distance = queue.pop(0) 
+        while node_distance_list:
+            current, distance = node_distance_list.pop(0) 
         
             if current == end:
                 return distance 
@@ -34,7 +34,7 @@ class Member:
                 visited.append(current)  
             
                 for friend in current.friends:
-                    queue.append((friend, distance + 1))  
+                    node_distance_list.append((friend, distance + 1))  
     
         return None  
 
