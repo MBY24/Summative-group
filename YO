@@ -19,22 +19,24 @@ class Member:
     def find_friends(self):
         return [friend.name for friend in self.friends]
 
-    def shortest_path(self, end, visited=None):
-        if visited is None:
-            visited = set()
+     # finding the shortest path using the breadth-first search (BFS) algorithm
+    def shortest_path(self, end):
+        queue = [(self, 0)] 
+        visited = []  
 
-        visited.add(self)
-
-        if self == end:
-            return 0
-
-        shortest = float('inf')
-        for friend in self.friends:
-            if friend not in visited:
-                new_path = 1 + friend.shortest_path(end, visited)
-                shortest = min(shortest, new_path)
-
-        return shortest if shortest != float('inf') else None
+        while queue:
+            current, distance = queue.pop(0) 
+        
+            if current == end:
+                return distance 
+        
+            if current not in visited:  
+                visited.append(current)  
+            
+                for friend in current.friends:
+                    queue.append((friend, distance + 1))  
+    
+        return None  
 
 
 # Example Usage:
