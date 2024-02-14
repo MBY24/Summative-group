@@ -10,3 +10,8 @@ class Memeber:
 
     def add_friend(self, member):
         self.friends.append(memeber)
+
+    def add_relationship(self, member):
+        if member not in self.friends:
+            self.add_friend(member)
+            member.add_friend(self)
