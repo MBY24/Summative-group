@@ -1,17 +1,59 @@
 #Hussain's lovely code: 
 
 class Member:
-
+    
     def __init__(self, name, age, location):
         self.name = name
         self.age = age
         self.location = location
         self.friends = []
 
-    def add_friend(self, member):
-        self.friends.append(member)
-
     def add_relationship(self, member):
         if member not in self.friends:
             self.add_friend(member)
             member.add_friend(self)
+
+    def add_friend(self, member):
+        self.friends.append(member)
+
+    def find_friends(self):
+        return [friend.name for friend in self.friends]
+
+    def shortest_path(self, end, visited=None):
+        if visited is None:
+            visited = set()
+
+        visited.add(self)
+
+        if self == end:
+            return 0
+
+        shortest = float('inf')
+        for friend in self.friends:
+            if friend not in visited:
+                new_path = 1 + friend.shortest_path(end, visited)
+                shortest = min(shortest, new_path)
+
+        return shortest if shortest != float('inf') else None
+
+
+# Example Usage:
+
+# create members
+alice = Member("Alice", 25, "New York")
+bob = Member("Bob", 30, "Los Angeles")
+charlie = Member("Charlie", 35, "Saudi Arabia")
+david = Member("David", 40, "US")
+
+# Add relationships
+alice.add_relationship(bob)
+bob.add_relationship(charlie)
+charlie.add_relationship(david)
+
+# Find all the friends of Alice
+alice_friends = alice.find_friends()
+print("Alice friends:", alice_friends) 
+
+# Find the shortest path between Alice and David
+shortest_path = alice.shortest_path(david)
+print("Shortest path between Alice and David:", shortest_path)
