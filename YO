@@ -1,51 +1,53 @@
-#Hussain's lovely code: 
-
 class Member:
     
+    # creating members
     def __init__(self, name, age, location):
         self.name = name
         self.age = age
         self.location = location
         self.friends = []
 
+    # adding relatioship between members   
     def add_relationship(self, member):
         if member not in self.friends:
             self.add_friend(member)
             member.add_friend(self)
-
+            
+    # add the member to a list of members
     def add_friend(self, member):
         self.friends.append(member)
 
+    # returning all friends of a specific member to iterate over when needed to find a path in the next method    
     def find_friends(self):
         return [friend.name for friend in self.friends]
 
-     # finding the shortest path using the breadth-first search (BFS) algorithm
+    # finding the shortest path using the breadth-first search (BFS) algorithm
     def shortest_path(self, end):
         node_distance_list = [(self, 0)] 
         visited = []  
 
         while node_distance_list:
-            current, distance = node_distance_list.pop(0) 
+            current_node, distance = node_distance_list.pop(0) # pop eleminates the first tuple and return it
+            # also when returning the tuple the first attribute takes the first element of the tuple and the second takes the second
         
-            if current == end:
+            if current_node == end:
                 return distance 
         
-            if current not in visited:  
-                visited.append(current)  
+            if current_node not in visited:  
+                visited.append(current_node)  
             
-                for friend in current.friends:
+                for friend in current_node.friends:
                     node_distance_list.append((friend, distance + 1))  
     
         return None  
-
-
+    
 # Example Usage:
 
 # create members
-alice = Member("Alice", 25, "New York")
-bob = Member("Bob", 30, "Los Angeles")
-charlie = Member("Charlie", 35, "Saudi Arabia")
-david = Member("David", 40, "US")
+alice = Member("Alice", 18, "New York")
+bob = Member("Bob", 19, "Los Angeles")
+charlie = Member("Charlie", 32, "Saudi Arabia")
+david = Member("David", 44, "US")
 
 # Add relationships
 alice.add_relationship(bob)
