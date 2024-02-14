@@ -1,6 +1,6 @@
 #Hussain's lovely code: 
 
-class Memeber:
+class Member:
 
     def __init__(self, name, age, location):
         self.name = name
@@ -9,7 +9,7 @@ class Memeber:
         self.friends = []
 
     def add_friend(self, member):
-        self.friends.append(memeber)
+        self.friends.append(member)
 
     def add_relationship(self, member):
         if member not in self.friends:
