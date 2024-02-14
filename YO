@@ -1,3 +1,17 @@
 #dgdgd 
 print("hello world")
 #hi
+
+
+#Hussain's lovely code: 
+
+class Memeber:
+
+    def __init__(self, name, age, location):
+        self.name = name
+        self.age = age
+        self.location = location
+        self.friends = []
+
+    def add_friend(self, member):
+        self.friends.append(memeber)
