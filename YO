@@ -65,23 +65,19 @@ print("Shortest path between Alice and David:", shortest_path)
 
 #SECOND PROJECT 
 
-#Hussain's lovely part: 
-
 class Graph:
     
-    #I'll represent the whole graph as a dictionary, each key is a vertex and the items attached to it are
-    # the edges between that vertex and other verticies, representing a relation ship
 
     def __init__(self, graph_name):
         self.graph_name = graph_name
-        self.verticies = {}
+        self.vertices = {}
 
     def add_vertex(self, character):
-        self.verticies[character] = []
+        self.vertices[character] = []
 
     def add_edge(self, vertex, relation):
-        self.verticies[vertex].append(relation)
-#here u have a typo.is "vertices" instead of verticies.
+        self.vertices[vertex].append(relation)
+#here u have a typo.is "vertices" instead of vertices.
 
     def adjacency_matrix(self):
         vertices_list = sorted(list(self.vertices.keys()))
@@ -108,7 +104,7 @@ def is_network_connected(graph):
     dfs(list(graph.vertices.keys())[0], visited)
     return len(visited) == len(graph.vertices)
 
-graph = Graph()
+graph = Graph("example")
 
 graph.add_vertex(1)
 graph.add_vertex(2)
@@ -122,7 +118,7 @@ graph.add_edge(1,4)
 graph.add_edge(1,5)
 graph.add_edge(1,6)
 
-graph = Graph()
+graph = Graph("example")
 for i in range(1, 7):
     graph.add_vertex(i)
 for i in range(1, 6):
@@ -132,5 +128,4 @@ print("Adjacency Matrix for Ring Network:")
 for row in graph.adjacency_matrix():
     print(row)
 print("Is Ring Network Connected:", is_network_connected(graph))
-
 
