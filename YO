@@ -61,3 +61,27 @@ print("Alice friends:", alice_friends)
 # Find the shortest path between Alice and David
 shortest_path = alice.shortest_path(david)
 print("Shortest path between Alice and David:", shortest_path)
+
+
+#SECOND PROJECT 
+
+#Hussain's lovely part: 
+
+class Graph:
+    
+    #I'll represent the whole graph as a dictionary, each key is a vertex and the items attached to it are
+    # the edges between that vertex and other verticies, representing a relation ship
+
+    def __init__(self, graph_name):
+        self.graph_name = graph_name
+        self.verticies = {}
+
+    def add_vertex(self, character):
+        self.verticies[character] = []
+
+    def add_edge(self, vertex, relation):
+        self.verticies[vertex].append(relation)
+
+#Next is Yang, then Raghad, the Mohammad
+
+
