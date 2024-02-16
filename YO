@@ -81,6 +81,7 @@ class Graph:
 
     def add_edge(self, vertex, relation):
         self.verticies[vertex].append(relation)
+#here u have a typo.is "vertices" instead of verticies.
 
     def adjacency_matrix(self):
         vertices_list = sorted(list(self.vertices.keys()))
