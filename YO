@@ -82,7 +82,19 @@ class Graph:
     def add_edge(self, vertex, relation):
         self.verticies[vertex].append(relation)
 
-#Next is Yang, then Raghad, the Mohammad
+    def adjacency_matrix(self):
+        vertices_list = sorted(list(self.vertices.keys()))
+        num_vertices = len(vertices_list)
+        adjacency_matrix = [[0] * num_vertices for _ in range(num_vertices)]
+        
+        for i in range(num_vertices):
+            for j in range(num_vertices):
+                if vertices_list[i] in self.vertices and vertices_list[j] in self.vertices[vertices_list[i]]:
+                    adjacency_matrix[i][j] = 1
+                    
+        return adjacency_matrix
+
+#Next Raghad, the Mohammad
 
 #Star Network 
 
