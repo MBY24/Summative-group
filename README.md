@@ -39,3 +39,12 @@ def find_neighbors(word, list):
             if (one_letter_difference(word, w)):
                 new_list.append(w)
     return new_list
+#find word_ladder
+def main():
+    with open("words_alpha.txt", "r") as file:
+        word_list = [word.strip() for word in file]
+    start_word = input("Enter the start word: ").upper()
+    end_word = input("Enter the end word: ").upper()
+    start_time = time.time()
+    ladder = word_ladder(start_word, end_word, word_list)
+    end_time = time.time()
