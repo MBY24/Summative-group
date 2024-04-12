@@ -1,3 +1,54 @@
 # 5554920, raghad
 import random
 # 5554920, raghad
+#5518326 Field yang
+MY PART :set up board size!
+import tkinter as tk
+#Pass master,rows,cols,start,end.
+class SnakesAndLaddersGUI:
+    def __init__(self, master, rows, cols, start, end):
+        self.master = master
+        self.rows = rows
+        self.cols = cols
+        self.start = start
+        self.end = end
+        self.board = self.create_board()
+        self.display_board()
+#Generating a game board
+    def create_board(self):
+        board = []
+        for i in range(self.rows):
+            row = []
+            for j in range(self.cols):
+                position = i * self.cols + j + 1
+                row.append(str(position))
+            if i % 2 == 1:#An odd number reverses the order of the row
+                row = row[::-1]  
+            board.extend(row)
+        return board
+#Displays the game board in the Tkinter window
+    def display_board(self):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                position = (self.rows - i - 1) * self.cols + j + 1
+                label_text = self.board[position - 1]
+                if position == self.start:
+                    label_text = "Start"
+                elif position == self.end:
+                    label_text = "End"
+                label = tk.Label(self.master, text=label_text, relief=tk.RIDGE, width=8, height=3)
+                label.grid(row=i, column=j)
+##Defines the number of rows, columns, start point, and end point of the game board
+def main():
+    rows = 10
+    cols = 10
+    start = 1
+    end = 91
+
+    root = tk.Tk()
+    root.title("Snakes and Ladders")
+    game_board = SnakesAndLaddersGUI(root, rows, cols, start, end)
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
