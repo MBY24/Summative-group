@@ -1,6 +1,46 @@
 # 5554920, raghad
 import random
+
+def __init__(self):
+        self.size = 100
+        self.players = {}  
+        self.snakes = {}   
+        self.ladders = {}  
+
+
+def player_position(self, player, steps):
+        current_player_position = self.players[player]
+        new_player_position = current_player_position + steps
+        if new_player_position > self.size:
+            return current_player_position
+        if self.binary_search(list(self.snakes.keys()), new_player_position):
+            new_player_position = self.snakes[new_player_position]
+        elif self.binary_search(list(self.ladders.keys()), new_player_position):
+            new_player_position = self.ladders[new_player_position]
+        return new_player_position
+    
+def binary_search(self, my_list, target):
+        start = 0
+        end = len(my_list) - 1
+        while start <= end:
+            mid = start + (end - start) // 2
+            if my_list[mid] == target:
+                return True
+            elif my_list[mid] < target:
+                start = mid + 1
+            else:
+                end = mid - 1
+        return False    
+    
+def players_user_generator(self):
+        num_of_players = int(input("Enter the number of players of the Snakes and Ladders game: "))
+        for i in range(1, num_of_players + 1):
+            player_name = input("Enter name of player " + str(i) + " : ")
+            self.players["Player" + str(i)] = 0       
 # 5554920, raghad
+
+
+
 #5518326 Field yang
 MY PART :set up board size!
 import tkinter as tk
