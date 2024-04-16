@@ -1,5 +1,7 @@
 # 5554920, raghad
 import random
+import tkinter as tk
+from tkinter import *
 
 def __init__(self):
         self.size = 100
@@ -42,8 +44,7 @@ def players_user_generator(self):
 
 
 #5518326 Field yang
-MY PART :set up board size!
-import tkinter as tk
+# MY PART :set up board size!
 #Pass master,rows,cols,start,end.
 class SnakesAndLaddersGUI:
     def __init__(self, master, rows, cols, start, end):
@@ -54,6 +55,7 @@ class SnakesAndLaddersGUI:
         self.end = end
         self.board = self.create_board()
         self.display_board()
+        self.diceimage()
 #Generating a game board
     def create_board(self):
         board = []
@@ -78,6 +80,50 @@ class SnakesAndLaddersGUI:
                     label_text = "End"
                 label = tk.Label(self.master, text=label_text, relief=tk.RIDGE, width=8, height=3)
                 label.grid(row=i, column=j)
+
+
+    def diceimage(self):
+        # Create a frame for dice and roll button
+        dice_frame = Frame(self.master)
+        dice_frame.grid(row=self.rows + 1, column=0, columnspan=self.cols, padx=10, pady=10)
+
+        # Create dice labels
+        self.dice_label1 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
+        self.dice_label1.grid(row=0, column=0, padx=5)
+
+        self.dice_label2 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
+        self.dice_label2.grid(row=0, column=1, padx=5)
+
+        # Create roll button
+        self.roll_button = Button(dice_frame, text="Roll Dice", command=self.roll_dice)
+        self.roll_button.grid(row=1, column=0, columnspan=2, pady=10)
+
+    def roll_dice(self):
+        game_dice = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
+        dice1 = random.choice(game_dice)
+        dice2 = random.choice(game_dice)
+        Dice1number = self.get_number(dice1)
+        Dice2number = self.get_number(dice2)
+        self.dice_label1.config(text=dice1)
+        self.dice_label2.config(text=dice2)
+        sub_dicelabel1 = Label(self.master, text="YOU ROLLED A : " + str(Dice1number + Dice2number))
+        sub_dicelabel1.grid(row=self.rows, column=0, columnspan=self.cols, pady=10)
+
+    def get_number(self, x):
+        if x == '\u2680':
+            return 1
+        elif x == '\u2681':
+            return 2
+        elif x == '\u2682':
+            return 3
+        elif x == '\u2683':
+            return 4
+        elif x == '\u2684':
+            return 5
+        elif x == '\u2685':
+            return 6
+
+
 ##Defines the number of rows, columns, start point, and end point of the game board
 def main():
     rows = 10
@@ -87,6 +133,7 @@ def main():
 
     root = tk.Tk()
     root.title("Snakes and Ladders")
+    root.geometry("650x800")
     game_board = SnakesAndLaddersGUI(root, rows, cols, start, end)
     root.mainloop()
 
