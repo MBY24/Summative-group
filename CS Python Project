@@ -1,7 +1,5 @@
 # 5554920, raghad
-import random
-import tkinter as tk
-from tkinter import *
+
 
 def __init__(self):
         self.size = 100
@@ -10,30 +8,35 @@ def __init__(self):
         self.ladders = {}  
 
 
-def player_position(self, player, steps):
-        current_player_position = self.players[player]
-        new_player_position = current_player_position + steps
-        if new_player_position > self.size:
-            return current_player_position
-        if self.binary_search(list(self.snakes.keys()), new_player_position):
-            new_player_position = self.snakes[new_player_position]
-        elif self.binary_search(list(self.ladders.keys()), new_player_position):
-            new_player_position = self.ladders[new_player_position]
-        return new_player_position
+def move_player(self, movements):
     
-def binary_search(self, my_list, target):
-        start = 0
-        end = len(my_list) - 1
-        while start <= end:
-            mid = start + (end - start) // 2
-            if my_list[mid] == target:
-                return True
-            elif my_list[mid] < target:
-                start = mid + 1
-            else:
-                end = mid - 1
-        return False    
-    
+        player_now = self.players[self.player_now]
+        position_now = player_now[1]
+        updated_position = position_now + movements
+        
+        if updated_position > self.end:
+            updated_position = self.end
+            
+        if updated_position in self.snakes:
+            print(f"{player_now[0]} landed on a snake!")
+            updated_position = self.snakes[updated_position] 
+            
+        elif updated_position in self.ladders:
+            print(f"{player_now[0]} landed on a ladder!")
+            updated_position = self.ladders[updated_position] 
+            
+        if updated_position > self.end:
+            updated_position = self.end  
+            
+        player_now[1] = updated_position
+        self.player_now = (self.player_now + 1) % len(self.players)
+        self.display_board()
+        
+        if updated_position == self.end:   
+            winner = player_now[0]
+            print(f"{winner} wins!")
+
+
 def players_user_generator(self):
         num_of_players = int(input("Enter the number of players of the Snakes and Ladders game: "))
         for i in range(1, num_of_players + 1):
