@@ -185,7 +185,7 @@ class SnakesAndLaddersGUI:
                 break
                 
             except ValueError:  
-                # Error handling if the user entered Invalid data type 
+                # Data Type Error handling if the user entered Invalid data type 
                 print("Invalid, plug an INTEGER only!")
         # Itration to get the name for each player based on the number inputed priviously        
         for i in range(tot_players):
