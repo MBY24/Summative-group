@@ -1,66 +1,8 @@
-# 5554920, raghad
-
-
-def __init__(self):
-        self.size = 100
-        self.players = {}  
-        self.snakes = {}   
-        self.ladders = {}  
-
-
-def move_player(self, movements):
-    
-        player_now = self.players[self.player_now]
-        position_now = player_now[1]
-        updated_position = position_now + movements
-        
-        if updated_position > self.end:
-            updated_position = self.end
-            
-        if updated_position in self.snakes:
-            print(f"{player_now[0]} landed on a snake!")
-            updated_position = self.snakes[updated_position] 
-            
-        elif updated_position in self.ladders:
-            print(f"{player_now[0]} landed on a ladder!")
-            updated_position = self.ladders[updated_position] 
-            
-        if updated_position > self.end:
-            updated_position = self.end  
-            
-        player_now[1] = updated_position
-        self.player_now = (self.player_now + 1) % len(self.players)
-        self.display_board()
-        
-        if updated_position == self.end:   
-            winner = player_now[0]
-            print(f"{winner} wins!")
-
-
-def players_generator(self):
-    
-        while True:
-            try:
-                tot_players = int(input("Plug number of players: "))
-                if tot_players <= 0:
-                    print("Number of players should be positive!")
-                    continue
-                break
-                
-            except ValueError:  
-                print("Invalid, plug an INTEGER only!")
-                
-        for i in range(tot_players):
-            while True:
-                name_of_player = input(f"Player name {i+1}: ")
-                if name_of_player:
-                    self.players.append([name_of_player, self.start])
-                    break
-                else:
-                    print("Enter a valid INTEGER!")    
-       
-# 5554920, raghad
-
+import tkinter as tk
+# raghad 5554920
+from tkinter import Frame, Label, Button
+# raghad 5554920
+import random
 
 
 #5518326 Field yang
@@ -73,10 +15,17 @@ class SnakesAndLaddersGUI:
         self.cols = cols
         self.start = start
         self.end = end
+        # raghad
+        self.players = []  
+        self.player_now = 0  
+        # raghad
         self.board = self.create_board()
         self.display_board()
         self.diceimage()
-#Generating a game board
+        self.snakes = {16: 6, 47: 26, 49: 11, 56: 53, 62: 19, 64: 60, 87: 24, 93: 73, 95: 75, 98: 78}  
+        self.ladders = {1: 38, 4: 14, 9: 31, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 80: 100}  
+
+    #Generating a game board    
     def create_board(self):
         board = []
         for i in range(self.rows):
@@ -84,12 +33,15 @@ class SnakesAndLaddersGUI:
             for j in range(self.cols):
                 position = i * self.cols + j + 1
                 row.append(str(position))
-            if i % 2 == 1:#An odd number reverses the order of the row
+            if i % 2 == 1:
                 row = row[::-1]  
             board.extend(row)
         return board
-#Displays the game board in the Tkinter window
+
+    
+    #Displays the game board in the Tkinter window
     def display_board(self):
+        
         for i in range(self.rows):
             for j in range(self.cols):
                 position = (self.rows - i - 1) * self.cols + j + 1
@@ -98,10 +50,25 @@ class SnakesAndLaddersGUI:
                     label_text = "Start"
                 elif position == self.end:
                     label_text = "End"
+                    
+                # raghad 5554920   
+                # iteration through players names and check which of them matches the specified position and then display their names 
+                # as labeled text 
+                name_of_players = []
+                for player in self.players:
+                    if player[1] == position:
+                        name_of_players.append(player[0])
+                if name_of_players:
+                    label_text += "\n"
+                    for name in name_of_players:
+                        label_text += "\n" + name                                
+                # raghad 5554920
+                
                 label = tk.Label(self.master, text=label_text, relief=tk.RIDGE, width=8, height=3)
                 label.grid(row=i, column=j)
 
-#2290275, MOHAMED ALZAABI 
+                
+    #2290275, MOHAMED ALZAABI            
     def diceimage(self):
         # Create a frame for dice and roll button
         dice_frame = Frame(self.master)
@@ -117,7 +84,8 @@ class SnakesAndLaddersGUI:
         # Create roll button
         self.roll_button = Button(dice_frame, text="Roll Dice", command=self.roll_dice)
         self.roll_button.grid(row=1, column=0, columnspan=2, pady=10)
-
+        
+                         
     def roll_dice(self):
         game_dice = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
         dice1 = random.choice(game_dice)
@@ -128,6 +96,11 @@ class SnakesAndLaddersGUI:
         self.dice_label2.config(text=dice2)
         sub_dicelabel1 = Label(self.master, text="YOU ROLLED A : " + str(Dice1number + Dice2number))
         sub_dicelabel1.grid(row=self.rows, column=0, columnspan=self.cols, pady=10)
+        
+        # raghad 5554920
+        # moving players based on the sum of the two dice
+        self.move_player(Dice1number + Dice2number)
+        # raghad 5554920
 
     def get_number(self, x):
         if x == '\u2680':
@@ -143,11 +116,94 @@ class SnakesAndLaddersGUI:
         elif x == '\u2685':
             return 6
 
-#2290275, MOHAMED ALZAABI 
+    #2290275, MOHAMED ALZAABI
+    
+        
+    # raghad 5554920
+    def move_player(self, movements: int) -> None:
+        
+        """
+        Move players based on the number of movements occur in the dices 
+        
+        Args:
+            movements (int): Number of steps that a player will move
 
+        Returns:
+            None
+        """
+        
+        player_now = self.players[self.player_now]
+        position_now = player_now[1]
+        updated_position = position_now + movements
+        
+        # Checking that the updated position is not higher than the end position
+        if updated_position > self.end:
+            updated_position = self.end
+        # Is the updated position a Snake head?    
+        if updated_position in self.snakes:
+            print(f"{player_now[0]} lands on snake head!")
+            updated_position = self.snakes[updated_position] 
+        # Is the updated position a Ladder bottom?    
+        elif updated_position in self.ladders:
+            print(f"{player_now[0]} landed on the bottom of ladder!")
+            updated_position = self.ladders[updated_position] 
+        # Checking again that the updated position is not higher than the end position if the player lands on a snake or ladder   
+        if updated_position > self.end:
+            updated_position = self.end    
+        player_now[1] = updated_position
+        # Changing to the next player turn  
+        self.player_now = (self.player_now + 1) % len(self.players)
+        # Calling the function to update players new position and display it
+        self.display_board()
+        # Checking for winning condition when a player reaches the end position
+        if updated_position == self.end:
+            winner = player_now[0]
+            print(f"{winner} is the winner!")
+            # If the one of the players reaches the end position the botton of the rolling the dice will be disables and the game stops
+            self.roll_button.config(state=tk.DISABLED)     
+    # raghad 5554920        
 
-##Defines the number of rows, columns, start point, and end point of the game board
+    
+    # raghad 5554920
+    def players_generator(self):
+        
+        """ 
+        
+        Generate players based on what the user input to know the number and name of players 
+        
+        Return: None 
+        
+        """
+        while True:
+            try:
+                # Getting number of players user wants
+                tot_players = int(input("Type number of players you want in the game: "))
+                # Checking the entered number of players is positive 
+                if tot_players <= 0:
+                    print("Number of players should be positive!")
+                    continue
+                break
+                
+            except ValueError:  
+                # Error handling if the user entered Invalid data type 
+                print("Invalid, plug an INTEGER only!")
+        # Itration to get the name for each player based on the number inputed priviously        
+        for i in range(tot_players):
+            while True:
+                name_of_player = input(f"Player name {i+1}: ")
+                # Another Error handling for names if user inputed nothing
+                if name_of_player:
+                    # If it is a valid name the player name and starting position will be added to players list!
+                    self.players.append([name_of_player, self.start])
+                    break
+                else:
+                    print("Enter a valid Name!")
+        # raghad 5554920            
+                    
+
 def main():
+    
+    #Defines the number of rows, columns, start point, and end point of the game board
     rows = 10
     cols = 10
     start = 1
@@ -155,16 +211,30 @@ def main():
 
     root = tk.Tk()
     root.title("Snakes and Ladders")
-#2290275, MOHAMED ALZAABI - setting the size of the screen for tkinter GUI
+    
+    #2290275, MOHAMED ALZAABI - setting the size of the screen for tkinter GUI
     root.geometry("650x800")
-#2290275, MOHAMED ALZAABI 
+    #2290275, MOHAMED ALZAABI
+
     game_board = SnakesAndLaddersGUI(root, rows, cols, start, end)
+    
+    # raghad 5554920
+    game_board.players_generator() 
+    # raghad 5554920
+    
     root.mainloop()
 
 if __name__ == "__main__":
     main()
 
 
+     
+
+        
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 #Hussain's lovely code
 
@@ -242,24 +312,3 @@ each list in the ladders list has the starting index for the ladder at the first
 index of of the ladder as the second item, and same things for the second item in the compound list which 
 has all of the information of the snakes
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
