@@ -25,6 +25,12 @@ class SnakesAndLaddersGUI:
         self.snakes = {16: 6, 47: 26, 49: 11, 56: 53, 62: 19, 64: 60, 87: 24, 93: 73, 95: 75, 98: 78}  
         self.ladders = {1: 38, 4: 14, 9: 31, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 80: 100}  
 
+
+#Hussain 
+
+# I'll try to do the same as this one but with the cells objects 
+#I'll keep it as a comment and tell what you think
+
     #Generating a game board    
     def create_board(self):
         board = []
@@ -37,6 +43,22 @@ class SnakesAndLaddersGUI:
                 row = row[::-1]  
             board.extend(row)
         return board
+
+#All I did is replacing the normal numbers that we had in our board, with cells objects
+'''
+def create_board(self):
+        board = []
+        for i in range(self.rows):
+            row = []
+            for j in range(self.cols):
+                Temp = Cell(i * self.cols + j + 1)
+                row.append(Temp)
+            if i % 2 == 1:
+                row = row[::-1]  
+            board.extend(row)
+        return board
+
+'''
 
     
     #Displays the game board in the Tkinter window
