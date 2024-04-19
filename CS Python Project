@@ -347,6 +347,11 @@ has all of the information of the snakes
  of a ladder or snake edge as well
  
  '''
+
+#implementing graphs
+
+# a cell is like a vertex, and the the edge connecting to cells either forms a ladder or a snake
+
 class Cell:
 
     def __init__(self, number):
