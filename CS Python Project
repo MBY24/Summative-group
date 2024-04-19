@@ -90,7 +90,23 @@ def create_board(self):
                 label.grid(row=i, column=j)
 
                 
-    #2290275, MOHAMED ALZAABI            
+    #2290275, MOHAMED ALZAABI  
+
+#Hussain's lovely comments
+
+'''
+
+Mohammad's and Raghad's code works perfectly fine, the problem is I need to merge my cell class and snakes and
+ladders generator functoin with his stuff, I still don't get how he presented everything without a board class, 
+or the is the GUI our board class in this case? I dunno. 
+
+Anyways, each square on our board should be an OBJECT if we want to implement graphs in our project, it's not gonna 
+be difficult, but we have to rewrite the whole numbers thing but by creating cell objects this time
+
+Yeah that' all
+
+''' 
+
     def diceimage(self):
         # Create a frame for dice and roll button
         dice_frame = Frame(self.master)
@@ -263,7 +279,10 @@ if __name__ == "__main__":
 import random
 
 #helper function
-#makes sure the ladder or snake that's been added is new and not identical to a previous one
+'''
+Makes sure a new generated ladder or snake hasn't been used before, to avoid having repeated ladders or snakes
+for example, it wouldn't make sense to have two ladders that both start at cell with number 5 and end with cell 
+number 23 (for example) to avoid this, I have created this function to make sure each ladder (or snake) is unique 
 
 def new_ladder_or_snake(ladders_snakes_list, current_ladder_snake):
     for i in range(len(ladders_snakes_list)):
@@ -354,25 +373,40 @@ has all of the information of the snakes
 
 class Cell:
 
+'''
+A cell (a square in the board) Can have three properties only: 
+1- each cells has a number that's gonna be displayed in the board while playing 
+2- A cell might (not necessarly) be the starting vertex of an edge representing a snake or a ladder
+3- A cell might (also not necessarly) be the ending vertex of an edge representing either a snake or a ladder 
+
+
     def __init__(self, number):
         self.number = number
         self.start_of = []
         self.end_of = []
+
+# To make this cell (vertex) the start of either a ladder or snake
 
     def add_start(self, *cells):
         for cell in cells:
             self.start_of.append(cell)
 
 
+# To make this cell (vertex) the end of either a ladder or snake
+
     def add_end(self, *cells):
         for cell in cells:
             self.end_of.append(cell)
+
+# Shows you all of the detials for the cell in more depth than just the number
 
     def display_connections(self):
         if (len(self.start_of) != 0 and len(self.end_of) !=0):
             return "Cell number " + str(self.number) + "\nis the of end of edges connecting cells with numbers: " + self.end_of + "\nand the start of cells edges conncecting cells with numbers: " + str(self.start_of)
         else:
             return "This isn't connected to any other cell, it's not the start of a ladder or snake nor the end of one"
+ 
+# So that when you print the object, you only get the number in the board, to avoid confusion 
 
     def __str__(self):
         return str(self.number)
