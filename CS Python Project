@@ -332,15 +332,20 @@ class Cell:
         self.start_of = []
         self.end_of = []
 
-    def add_start(self, another_cell):
-        self.start_of.append(another_cell.number)
+    def add_start(self, *cells):
+        for cell in cells:
+            self.start_of.append(cell)
 
-    def add_end(self, another_cell):
-        self.end_of.append(another_cell.number)
+
+    def add_end(self, *cells):
+        for cell in cells:
+            self.end_of.append(cell)
 
     def display_connections(self):
-        if (len(self.start_of) != 0 and len(self.end_of) !=0): 
+        if (len(self.start_of) != 0 and len(self.end_of) !=0):
             return "Cell number " + str(self.number) + "\nis the of end of edges connecting cells with numbers: " + self.end_of + "\nand the start of cells edges conncecting cells with numbers: " + str(self.start_of)
         else:
             return "This isn't connected to any other cell, it's not the start of a ladder or snake nor the end of one"
-            
+
+    def __str__(self):
+        return str(self.number)
