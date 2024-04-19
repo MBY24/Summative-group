@@ -314,33 +314,33 @@ has all of the information of the snakes
 """
 
 
-
-
-
-# Hussain's miserable attempt to implement graphs plz don't laugh 
+# Hussain's miserable attempt to implement graphs plz don't laugh
 
 # A cell is basically a square in the graph
 
-# I couldn't think of any way to implement graphs in our project except for this 
+# I couldn't think of any way to implement graphs in our project except for this
 '''
  each sqaure in our grid is gonna be a cell object, a cell object has a number, and other properties showcasing
  the relationships with other cells, the cell might be the start of a ladder or a snake edge, or might be the end 
  of a ladder or snake edge as well
  
  '''
-class Cell: 
-    
+class Cell:
+
     def __init__(self, number):
         self.number = number
-        self.start_of = [] 
+        self.start_of = []
         self.end_of = []
-    
+
     def add_start(self, another_cell):
         self.start_of.append(another_cell.number)
-        
+
     def add_end(self, another_cell):
         self.end_of.append(another_cell.number)
-        
+
     def display_connections(self):
-        return "Cell number " + str(self.number) + "\nis the of end of edges connecting cells with numbers: " + self.end_of + "\nand the start of cells edges conncecting cells with numbers: " + str(self.start_of)
+        if (len(self.start_of) != 0 and len(self.end_of) !=0): 
+            return "Cell number " + str(self.number) + "\nis the of end of edges connecting cells with numbers: " + self.end_of + "\nand the start of cells edges conncecting cells with numbers: " + str(self.start_of)
+        else:
+            return "This isn't connected to any other cell, it's not the start of a ladder or snake nor the end of one"
             
