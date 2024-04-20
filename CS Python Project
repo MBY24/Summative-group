@@ -284,20 +284,23 @@ Makes sure a new generated ladder or snake hasn't been used before, to avoid hav
 for example, it wouldn't make sense to have two ladders that both start at cell with number 5 and end with cell 
 number 23 (for example) to avoid this, I have created this function to make sure each ladder (or snake) is unique 
 
+
 def new_ladder_or_snake(ladders_snakes_list, current_ladder_snake):
-    for i in range(len(ladders_snakes_list)):
-        if(ladders_snakes_list[i] == current_ladder_snake):
-            return False
+    #returns the common items
 
-    return True
+    if (len(ladders_snakes_list.items() & current_ladder_snake.items()) == 0):
+# if there are no common items, return true
 
-def add_snakes_and_ladders(array, num_ladders, num_snakes):
+        return True 
+    else: 
+        return False
+
+
+def generate_ladders(array, num_ladders):
 
     length = len(array[0]) * len(array)
 
-    ladders_list = []
-
-    snakes_list = []
+    ladders_list = {}
 
 #generating ladders:
 
@@ -309,50 +312,66 @@ def add_snakes_and_ladders(array, num_ladders, num_snakes):
             edge1 = random.randint(1,length)
             edge2 = random.randint(1,length)
 
+# To make sure that the keys are all the start of the ladders, and the values are the end of them as well
+
             if(edge1 < edge2):
                 temp_list = [edge1, edge2]
                 if( (i==0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    ladders_list.append(temp_list)
+                    ladders_list[temp_list[0]] = temp_list[1]
                     break
 
             elif(edge2 < edge1):
                 temp_list = [edge2, edge1]
                 if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    ladders_list.append(temp_list)
+                    ladders_list[temp_list[0]] = temp_list[1]
                     break
 
-# generating snakes, basically same concept
+    return ladders_list
+
+
+def generate_snakes(array, num_snakes):
+    length = len(array[0]) * len(array)
+
+    snakes_list = {}
+
+    # generating ladders:
 
     for i in range(num_snakes):
         # will generate a ladder with two different starting and ending index
 
         while True:
 
+
+
             edge1 = random.randint(1, length)
             edge2 = random.randint(1, length)
+
+# to make sure that the keys are all the start of the snakes, and the values are the end of them as well
 
             if (edge1 < edge2):
                 temp_list = [edge1, edge2]
                 if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    snakes_list.append(temp_list)
+                    snakes_list[temp_list[0]] = temp_list[1]
                     break
+
+
 
             elif (edge2 < edge1):
                 temp_list = [edge2, edge1]
                 if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    snakes_list.append(temp_list)
+                    snakes_list[temp_list[0]] = temp_list[1]
                     break
 
-    compound_list = [ladders_list, snakes_list]
-    return compound_list
+    return snakes_list
+
 
 """
-
-The function return a 2 item list, the first item being a 2d list of ladders of the grid
-each list in the ladders list has the starting index for the ladder at the first item, and the ending 
-index of of the ladder as the second item, and same things for the second item in the compound list which 
-has all of the information of the snakes
+each function returns a dictionary containg keys representing the start of either the ladder or the snake, and 
+values representing the end of them. 
 """
+
+
+
 
 
 # Hussain's miserable attempt to implement graphs plz don't laugh
