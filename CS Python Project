@@ -161,9 +161,9 @@ Yeah that' all
     def move_player(self, movements: int) -> None:
         
         """
-        Move players based on the number of movements occur in the dices 
+       The function Move players based on the number of movements occur in the dices 
         
-        Args:
+        Parameters:
             movements (int): Number of steps that a player will move
 
         Returns:
@@ -207,7 +207,7 @@ Yeah that' all
         
         """ 
         
-        Generate players based on what the user input to know the number and name of players 
+       The function Generate players based on what the user input to know the number and name of players 
         
         Return: None 
         
