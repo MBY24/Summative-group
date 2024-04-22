@@ -76,8 +76,16 @@ class SnakesAndLaddersGUI:
         self.board = self.create_board()
         self.display_board()
         self.diceimage()
-        self.snakes = generate_snakes(self, rows, cols, 4)
-        self.ladders = generate_ladders(self, rows, cols, 5)
+        self.snakes = {}
+        self.ladders = {}
+
+        #This while loop prevents falling into an infinite loop int he program, imagine if a snake and ladder both
+        #start and at the same position, falling on the start or end at one of them would cause and infinite loop
+        #that's why this while loop insures no snake and ladder are exactly the same
+
+        while (len(self.snakes) == 0 and len(self.ladders) == 0) or (len(self.snakes.items() & self.ladders.items()) != 0): 
+            self.snakes = generate_snakes(self, rows, cols, 4)
+            self.ladders = generate_ladders(self, rows, cols, 5)
 
     # Hussain and Yang 5555154 , 5518326
 
