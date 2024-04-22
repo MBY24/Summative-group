@@ -310,13 +310,9 @@ number 23 (for example) to avoid this, I have created this function to make sure
     '''
 
     def new_ladder_or_snake(self, ladders_snakes_list, current_ladder_snake):
-        #returns the common items
-
-        if (len(ladders_snakes_list.items() & current_ladder_snake.items()) == 0):
-            # if there are no common items, return true
-
-            return True
-         return False
+        #returns 1 if there are common items
+        return len(ladders_snakes_list.items() & current_ladder_snake.items() 
+            # if there are no common items, return 0
 
 
     def generate_ladders(rows, cols , num_ladders):
