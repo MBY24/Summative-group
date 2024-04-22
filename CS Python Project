@@ -29,6 +29,8 @@ class SnakesAndLaddersGUI:
     # Hussain and Yang 5555154 , 5518326
 
     # Generating a game board
+
+    '''
     def create_board(self):
         board = []
         for i in range(self.rows):
@@ -40,126 +42,127 @@ class SnakesAndLaddersGUI:
                 row = row[::-1]
             board.extend(row)
         return board
+    '''
 
 
 # All I did is replacing the normal numbers that we had in our board, with cells objects
-'''
-def create_board(self):
-        board = []
-        for i in range(self.rows):
-            row = []
-            for j in range(self.cols):
-                Temp = Cell(i * self.cols + j + 1)
-                row.append(Temp.number)
-            if i % 2 == 1:
-                row = row[::-1]  
-            board.extend(row)
-        return board
 
-'''
+    def create_board(self):
+            board = []
+            for i in range(self.rows):
+                row = []
+                for j in range(self.cols):
+                    Temp = Cell(i * self.cols + j + 1)
+                    row.append(Temp.number)
+                if i % 2 == 1:
+                    row = row[::-1]
+                board.extend(row)
+            return board
+
+
 
 
 # Displays the game board in the Tkinter window
-def display_board(self):
-    for i in range(self.rows):
-        for j in range(self.cols):
-            position = (self.rows - i - 1) * self.cols + j + 1
-            label_text = self.board[position - 1]
-            if position == self.start:
-                label_text = "Start"
-            elif position == self.end:
-                label_text = "End"
+    def display_board(self):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                position = (self.rows - i - 1) * self.cols + j + 1
+                label_text = self.board[position - 1]
+                if position == self.start:
+                    label_text = "Start"
+                elif position == self.end:
+                    label_text = "End"
 
             # raghad 5554920
             # iteration through players names and check which of them matches the specified position and then display their names
             # as labeled text
-            name_of_players = []
-            for player in self.players:
-                if player[1] == position:
-                    name_of_players.append(player[0])
-            if name_of_players:
-                label_text += "\n"
-                for name in name_of_players:
-                    label_text += "\n" + name
-                    # raghad 5554920
+                name_of_players = []
+                for player in self.players:
+                    if player[1] == position:
+                        name_of_players.append(player[0])
+                if name_of_players:
+                    label_text += "\n"
+                    for name in name_of_players:
+                        label_text += "\n" + name
+                        # raghad 5554920
 
-            label = tk.Label(self.master, text=label_text, relief=tk.RIDGE, width=8, height=3)
-            label.grid(row=i, column=j)
+                label = tk.Label(self.master, text=label_text, relief=tk.RIDGE, width=8, height=3)
+                label.grid(row=i, column=j)
 
 
 # 2290275, MOHAMED ALZAABI
 
 
-def diceimage(self):
+    def diceimage(self):
     # Create a frame for dice and roll button
-    dice_frame = Frame(self.master)
-    dice_frame.grid(row=self.rows + 1, column=0, columnspan=self.cols, padx=10, pady=10)
+        dice_frame = Frame(self.master)
+        dice_frame.grid(row=self.rows + 1, column=0, columnspan=self.cols, padx=10, pady=10)
 
     # Create dice labels
-    self.dice_label1 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
-    self.dice_label1.grid(row=0, column=0, padx=5)
+        self.dice_label1 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
+        self.dice_label1.grid(row=0, column=0, padx=5)
 
-    self.dice_label2 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
-    self.dice_label2.grid(row=0, column=1, padx=5)
+        self.dice_label2 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
+        self.dice_label2.grid(row=0, column=1, padx=5)
 
     # Create roll button
-    self.roll_button = Button(dice_frame, text="Roll Dice", command=self.roll_dice)
-    self.roll_button.grid(row=1, column=0, columnspan=2, pady=10)
+        self.roll_button = Button(dice_frame, text="Roll Dice", command=self.roll_dice)
+        self.roll_button.grid(row=1, column=0, columnspan=2, pady=10)
 
 
-def roll_dice(self):
+    def roll_dice(self):
 
     # shows the images of the numbers of the dice on gui
 
-    game_dice = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
+        game_dice = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
 
     #because we're rolling two dice...
 
-    dice1 = random.choice(game_dice)
-    dice2 = random.choice(game_dice)
+        dice1 = random.choice(game_dice)
+        dice2 = random.choice(game_dice)
 
-    Dice1number = self.get_number(dice1)
-    Dice2number = self.get_number(dice2)
+        Dice1number = self.get_number(dice1)
+        Dice2number = self.get_number(dice2)
 
     # displaying the labels
 
-    self.dice_label1.config(text=dice1)
-    self.dice_label2.config(text=dice2)
+        self.dice_label1.config(text=dice1)
+        self.dice_label2.config(text=dice2)
 
     # show the user the what they have got from the dice
 
-    sub_dicelabel1 = Label(self.master, text="YOU ROLLED A : " + str(Dice1number + Dice2number))
-    sub_dicelabel1.grid(row=self.rows, column=0, columnspan=self.cols, pady=10)
+        sub_dicelabel1 = Label(self.master, text="YOU ROLLED A : " + str(Dice1number + Dice2number))
+        sub_dicelabel1.grid(row=self.rows, column=0, columnspan=self.cols, pady=10)
 
     # raghad 5554920
     # moving players based on the sum of the two dice
-    self.move_player(Dice1number + Dice2number)
+        self.move_player(Dice1number + Dice2number)
     # raghad 5554920
 
 
 # returning the number rolled from the dice
 
-def get_number(self, x):
-    if x == '\u2680':
-        return 1
-    elif x == '\u2681':
-        return 2
-    elif x == '\u2682':
-        return 3
-    elif x == '\u2683':
-        return 4
-    elif x == '\u2684':
-        return 5
-    elif x == '\u2685':
-        return 6
+    def get_number(self, x):
+        if x == '\u2680':
+            return 1
+        elif x == '\u2681':
+            return 2
+        elif x == '\u2682':
+            return 3
+        elif x == '\u2683':
+            return 4
+        elif x == '\u2684':
+            return 5
+        elif x == '\u2685':
+            return 6
 
 
 # 2290275, MOHAMED ALZAABI
 
 
 # raghad 5554920
-def move_player(self, movements: int) -> None:
-    """
+    def move_player(self, movements: int) -> None:
+        """
    The function Move players based on the number of movements occur in the dices
 
     Parameters:
@@ -167,75 +170,166 @@ def move_player(self, movements: int) -> None:
 
     Returns:
         None
-    """
+        """
 
-    player_now = self.players[self.player_now]
-    position_now = player_now[1]
-    updated_position = position_now + movements
+        player_now = self.players[self.player_now]
+        position_now = player_now[1]
+        updated_position = position_now + movements
 
     # Checking that the updated position is not higher than the end position
-    if updated_position > self.end:
-        updated_position = self.end
+        if updated_position > self.end:
+            updated_position = self.end
     # Is the updated position a Snake head?
-    if updated_position in self.snakes:
-        print(f"{player_now[0]} lands on snake head!")
-        updated_position = self.snakes[updated_position]
+        if updated_position in self.snakes:
+            print(f"{player_now[0]} lands on snake head!")
+            updated_position = self.snakes[updated_position]
         # Is the updated position a Ladder bottom?
-    elif updated_position in self.ladders:
-        print(f"{player_now[0]} landed on the bottom of ladder!")
-        updated_position = self.ladders[updated_position]
+        elif updated_position in self.ladders:
+            print(f"{player_now[0]} landed on the bottom of ladder!")
+            updated_position = self.ladders[updated_position]
         # Checking again that the updated position is not higher than the end position if the player lands on a snake or ladder
-    if updated_position > self.end:
-        updated_position = self.end
-    player_now[1] = updated_position
+        if updated_position > self.end:
+            updated_position = self.end
+        player_now[1] = updated_position
     # Changing to the next player turn
-    self.player_now = (self.player_now + 1) % len(self.players)
+        self.player_now = (self.player_now + 1) % len(self.players)
     # Calling the function to update players new position and display it
-    self.display_board()
+        self.display_board()
     # Checking for winning condition when a player reaches the end position
-    if updated_position == self.end:
-        winner = player_now[0]
-        print(f"{winner} is the winner!")
+        if updated_position == self.end:
+            winner = player_now[0]
+            print(f"{winner} is the winner!")
         # If the one of the players reaches the end position the botton of the rolling the dice will be disables and the game stops
-        self.roll_button.config(state=tk.DISABLED)
-        # raghad 5554920
+            self.roll_button.config(state=tk.DISABLED)
+            # raghad 5554920
 
 
 # raghad 5554920
-def players_generator(self):
-    """
+    def players_generator(self):
+        """
 
    The function Generate players based on what the user input to know the number and name of players
 
     Return: None
 
-    """
-    while True:
-        try:
+        """
+        while True:
+            try:
             # Getting number of players user wants
-            tot_players = int(input("Type number of players you want in the game: "))
+                tot_players = int(input("Type number of players you want in the game: "))
             # Checking the entered number of players is positive
-            if tot_players <= 0:
-                print("Number of players should be positive!")
-                continue
-            break
+                if tot_players <= 0:
+                    print("Number of players should be positive!")
+                    continue
+                break
 
-        except ValueError:
+            except ValueError:
             # Data Type Error handling if the user entered Invalid data type
             # Gotta make it user friendly
-            print("Invalid, plug an INTEGER only!")
+                print("Invalid, plug an INTEGER only!")
     # Itration to get the name for each player based on the number inputed priviously
-    for i in range(tot_players):
-        while True:
-            name_of_player = input(f"Player name {i + 1}: ")
+        for i in range(tot_players):
+            while True:
+                name_of_player = input(f"Player name {i + 1}: ")
             # Another Error handling for names if user inputed nothing
-            if name_of_player:
+                if name_of_player:
                 # If it is a valid name the player name and starting position will be added to players list!
-                self.players.append([name_of_player, self.start])
-                break
-            else:
-                print("Enter a valid Name!")
+                    self.players.append([name_of_player, self.start])
+                    break
+                else:
+                    print("Enter a valid Name!")
     # raghad 5554920
+
+# helper function
+    '''
+Makes sure a new generated ladder or snake hasn't been used before, to avoid having repeated ladders or snakes
+for example, it wouldn't make sense to have two ladders that both start at cell with number 5 and end with cell 
+number 23 (for example) to avoid this, I have created this function to make sure each ladder (or snake) is unique 
+    '''
+
+    def new_ladder_or_snake(ladders_snakes_list, current_ladder_snake):
+    #returns the common items
+
+        if (len(ladders_snakes_list.items() & current_ladder_snake.items()) == 0):
+# if there are no common items, return true
+
+            return True
+        else:
+            return False
+
+
+    def generate_ladders(rows, cols , num_ladders):
+
+        length = rows * cols
+
+        ladders_list = {}
+
+#generating ladders:
+
+        for i in range(num_ladders):
+        #will generate a ladder with two different starting and ending index
+
+            while True:
+
+                edge1 = random.randint(1,length)
+                edge2 = random.randint(1,length)
+
+# To make sure that the keys are all the start of the ladders, and the values are the end of them as well
+
+                if(edge1 < edge2):
+                    temp_list = [edge1, edge2]
+                    if( (i==0) or new_ladder_or_snake(ladders_list, temp_list)):
+                        ladders_list[temp_list[0]] = temp_list[1]
+                        break
+
+                elif(edge2 < edge1):
+                    temp_list = [edge2, edge1]
+                    if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
+                        ladders_list[temp_list[0]] = temp_list[1]
+                        break
+
+        return ladders_list
+
+
+    def generate_snakes(rows, cols, num_snakes):
+        length = rows * cols
+
+        snakes_list = {}
+
+    # generating ladders:
+
+        for i in range(num_snakes):
+        # will generate a ladder with two different starting and ending index
+
+            while True:
+
+                edge1 = random.randint(1, length)
+                edge2 = random.randint(1, length)
+
+# to make sure that the keys are all the start of the snakes, and the values are the end of them as well
+
+                if (edge1 < edge2):
+                    temp_list = [edge1, edge2]
+                    if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
+                        snakes_list[temp_list[0]] = temp_list[1]
+                        break
+
+
+
+                elif (edge2 < edge1):
+                    temp_list = [edge2, edge1]
+                    if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
+                        snakes_list[temp_list[0]] = temp_list[1]
+                        break
+
+        return snakes_list
+
+
+"""
+each function returns a dictionary containg keys representing the start of either the ladder or the snake, and 
+values representing the end of them. 
+"""
+
 
 
 def main():
@@ -273,97 +367,6 @@ if __name__ == "__main__":
 
 
 
-# helper function
-'''
-Makes sure a new generated ladder or snake hasn't been used before, to avoid having repeated ladders or snakes
-for example, it wouldn't make sense to have two ladders that both start at cell with number 5 and end with cell 
-number 23 (for example) to avoid this, I have created this function to make sure each ladder (or snake) is unique 
-
-
-def new_ladder_or_snake(ladders_snakes_list, current_ladder_snake):
-    #returns the common items
-
-    if (len(ladders_snakes_list.items() & current_ladder_snake.items()) == 0):
-# if there are no common items, return true
-
-        return True 
-    else: 
-        return False
-
-
-def generate_ladders(rows, cols , num_ladders):
-
-    length = rows * cols
-
-    ladders_list = {}
-
-#generating ladders:
-
-    for i in range(num_ladders):
-        #will generate a ladder with two different starting and ending index
-
-        while True:
-
-            edge1 = random.randint(1,length)
-            edge2 = random.randint(1,length)
-
-# To make sure that the keys are all the start of the ladders, and the values are the end of them as well
-
-            if(edge1 < edge2):
-                temp_list = [edge1, edge2]
-                if( (i==0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    ladders_list[temp_list[0]] = temp_list[1]
-                    break
-
-            elif(edge2 < edge1):
-                temp_list = [edge2, edge1]
-                if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    ladders_list[temp_list[0]] = temp_list[1]
-                    break
-
-    return ladders_list
-
-
-def generate_snakes(rows, cols, num_snakes):
-    length = rows * cols
-
-    snakes_list = {}
-
-    # generating ladders:
-
-    for i in range(num_snakes):
-        # will generate a ladder with two different starting and ending index
-
-        while True:
-
-
-
-            edge1 = random.randint(1, length)
-            edge2 = random.randint(1, length)
-
-# to make sure that the keys are all the start of the snakes, and the values are the end of them as well
-
-            if (edge1 < edge2):
-                temp_list = [edge1, edge2]
-                if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    snakes_list[temp_list[0]] = temp_list[1]
-                    break
-
-
-
-            elif (edge2 < edge1):
-                temp_list = [edge2, edge1]
-                if ((i == 0) or new_ladder_or_snake(ladders_list, temp_list)):
-                    snakes_list[temp_list[0]] = temp_list[1]
-                    break
-
-    return snakes_list
-
-
-"""
-each function returns a dictionary containg keys representing the start of either the ladder or the snake, and 
-values representing the end of them. 
-"""
 
 
 # Hussain's miserable attempt to implement graphs plz don't laugh
@@ -376,48 +379,48 @@ values representing the end of them.
 
 class Cell:
 
-"Represents each square in the board" 
 
 
-def __init__(self, number):
-    self.number = number
-    self.start_of = []
-    self.end_of = []
+
+    def __init__(self, number):
+        self.number = number
+        self.start_of = []
+        self.end_of = []
 
 
 # To make this cell (vertex) the start of either a ladder or snake
 
-def add_start(self, *cells):
-    for cell in cells:
-        self.start_of.append(cell)
+    def add_start(self, *cells):
+        for cell in cells:
+            self.start_of.append(cell)
 
 
 # To make this cell (vertex) the end of either a ladder or snake
 
-def add_end(self, *cells):
-    for cell in cells:
-        self.end_of.append(cell)
+    def add_end(self, *cells):
+        for cell in cells:
+            self.end_of.append(cell)
 
 
 # Shows you all of the detials for the cell in more depth than just the number
 
 
-def display_connections(self):
-    if (len(self.start_of) != 0 and len(self.end_of) != 0):
-        return "Cell number " + str(
-            self.number) + "\nis the of end of edges connecting cells with numbers: " + str(self.end_of) + "\nand the start of cells edges conncecting cells with numbers: " + str(
-            self.start_of)
-    elif (len(self.start_of) != 0):
-        return "Cell number " + str(self.number) +  "\nis only the start of edge connecting with numbers: " + str(self.start_of)
-    elif (len(self.end_of) != 0):
-        return "Cell number " + str(self.number) + "\nis only the end of edge connecting with numbers: " + str(
-            self.end_of)
+    def display_connections(self):
+        if (len(self.start_of) != 0 and len(self.end_of) != 0):
+            return "Cell number " + str(
+                self.number) + "\nis the of end of edges connecting cells with numbers: " + str(self.end_of) + "\nand the start of cells edges conncecting cells with numbers: " + str(
+                self.start_of)
+        elif (len(self.start_of) != 0):
+            return "Cell number " + str(self.number) +  "\nis only the start of edge connecting with numbers: " + str(self.start_of)
+        elif (len(self.end_of) != 0):
+            return "Cell number " + str(self.number) + "\nis only the end of edge connecting with numbers: " + str(
+                self.end_of)
 
-    else:
-        return ""
+        else:
+            return ""
 
 
 # So that when you print the object, you only get the number in the board, to avoid confusion
 
-def __str__(self):
-    return str(self.number)
+    def __str__(self):
+        return str(self.number)
