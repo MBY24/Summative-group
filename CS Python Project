@@ -7,20 +7,23 @@ import random
 
 #5518326 Field yang
 # MY PART :set up board size!
-#Pass master,rows,cols,start,end.
-class SnakesAndLaddersGUI:
+#yang 5518326
+class SnakesAndLaddersGUI:#Define a class named SnakesAndLaddersGUI
     def __init__(self, master, rows, cols, start, end):
-        self.master = master
-        self.rows = rows
-        self.cols = cols
-        self.start = start
-        self.end = end
+        self.master = master #Save a reference to the main tkinter window
+        self.rows = rows #The number of rows of the game board
+        self.cols = cols #The number of columns of the game board
+        self.start = start #Starting position
+        self.end = end #final position
+#yang 5518326
         # raghad
         self.players = []  
         self.player_now = 0  
         # raghad
-        self.board = self.create_board()
-        self.display_board()
+#yang 5518326
+        self.board = self.create_board() #Creating a game board
+        self.display_board() #Display game board
+#yang 5518326
         self.diceimage()
         self.snakes = {16: 6, 47: 26, 49: 11, 56: 53, 62: 19, 64: 60, 87: 24, 93: 73, 95: 75, 98: 78}  
         self.ladders = {1: 38, 4: 14, 9: 31, 21: 42, 28: 84, 36: 44, 51: 67, 71: 91, 80: 100}  
@@ -31,18 +34,20 @@ class SnakesAndLaddersGUI:
 # I'll try to do the same as this one but with the cells objects 
 #I'll keep it as a comment and tell what you think
 
-    #Generating a game board    
-    def create_board(self):
-        board = []
+#yang 5518326
+    
+    def create_board(self):  #A method to create a game board   
+        board = []  #Create an empty list to store the game board
         for i in range(self.rows):
-            row = []
+            row = []  #Create an empty list for each row
             for j in range(self.cols):
-                position = i * self.cols + j + 1
-                row.append(str(position))
-            if i % 2 == 1:
+                position = i * self.cols + j + 1  #Calculate the position of the cell
+                row.append(str(position)) #Append the position to the row list
+            if i % 2 == 1: #Reverse the row every other time to simulate reading direction
                 row = row[::-1]  
-            board.extend(row)
-        return board
+            board.extend(row)  #Add the row to the game board
+        return board #back to the game board
+#yang 5518326
 
 #All I did is replacing the normal numbers that we had in our board, with cells objects
 '''
@@ -60,18 +65,19 @@ def create_board(self):
 
 '''
 
-    
-    #Displays the game board in the Tkinter window
+#yang 5518326
+    #display the game board in the Tkinter window
     def display_board(self):
         
         for i in range(self.rows):
             for j in range(self.cols):
-                position = (self.rows - i - 1) * self.cols + j + 1
-                label_text = self.board[position - 1]
-                if position == self.start:
-                    label_text = "Start"
-                elif position == self.end:
-                    label_text = "End"
+                position = (self.rows - i - 1) * self.cols + j + 1 #calculate the position of the cell
+                label_text = self.board[position - 1] #get the text content of a cell
+                if position == self.start: #if the position is the starting point
+                    label_text = "Start" #set the label text to : Start
+                elif position == self.end: #if the position is the end point
+                    label_text = "End" #set the label text to: End
+#yang 5518326
                     
                 # raghad 5554920   
                 # iteration through players names and check which of them matches the specified position and then display their names 
@@ -85,10 +91,10 @@ def create_board(self):
                     for name in name_of_players:
                         label_text += "\n" + name                                
                 # raghad 5554920
-                
-                label = tk.Label(self.master, text=label_text, relief=tk.RIDGE, width=8, height=3)
-                label.grid(row=i, column=j)
-
+#yang 5518326
+                label = tk.Label(self.master, text=label_text, relief=tk.RIDGE, width=8, height=3) #create a tkinter Label with cell text
+                label.grid(row=i, column=j) #display the label in the tkinter window
+#yang 5518326
                 
     #2290275, MOHAMED ALZAABI  
 
@@ -238,8 +244,8 @@ Yeah that' all
                     print("Enter a valid Name!")
         # raghad 5554920            
                     
-
-def main():
+#yang 5518326
+def main(): #the main function to create the tkinter window and display the game board
     
     #Defines the number of rows, columns, start point, and end point of the game board
     rows = 10
@@ -247,8 +253,8 @@ def main():
     start = 1
     end = 91
 
-    root = tk.Tk()
-    root.title("Snakes and Ladders")
+    root = tk.Tk() #create a tkinter window
+    root.title("Snakes and Ladders") #set the window title
     
     #2290275, MOHAMED ALZAABI - setting the size of the screen for tkinter GUI
     root.geometry("650x800")
