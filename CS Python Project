@@ -147,18 +147,22 @@ class SnakesAndLaddersGUI:
 
 
     def diceimage(self):
-    # Create a frame for dice and roll button
+    # Create a frame for dice and roll button so that it can be later placed in the Tkinter window
         dice_frame = Frame(self.master)
         dice_frame.grid(row=self.rows + 1, column=0, columnspan=self.cols, padx=10, pady=10)
 
-    # Create dice labels
+    ''' Here we create a Labels for the dice
+        these labels are the unicode letters for the dice on computers and we enlarge them to make it appear as
+        a neat dice image for the player in the Tkinter window '''
+
         self.dice_label1 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
         self.dice_label1.grid(row=0, column=0, padx=5)
 
         self.dice_label2 = Label(dice_frame, text='', font=('Arial', 100, 'bold'))
         self.dice_label2.grid(row=0, column=1, padx=5)
 
-    # Create roll button
+    # Creating the roll button for the player to press and then both dice are supposed to roll and give us an output
+
         self.roll_button = Button(dice_frame, text="Roll Dice", command=self.roll_dice)
         self.roll_button.grid(row=1, column=0, columnspan=2, pady=10)
 
@@ -169,7 +173,9 @@ class SnakesAndLaddersGUI:
 
         game_dice = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685']
 
-    #because we're rolling two dice...
+    ''' since we are rolling 2 dice here
+        we are supposed to get a seperate result from each dice
+        which results in 2 different values '''
 
         dice1 = random.choice(game_dice)
         dice2 = random.choice(game_dice)
@@ -182,7 +188,7 @@ class SnakesAndLaddersGUI:
         self.dice_label1.config(text=dice1)
         self.dice_label2.config(text=dice2)
 
-    # show the user the what they have got from the dice
+    # Creating the label that appears to the player and tells him the combined value of the each dice roll 
 
         sub_dicelabel1 = Label(self.master, text="YOU ROLLED A : " + str(Dice1number + Dice2number))
         sub_dicelabel1.grid(row=self.rows, column=0, columnspan=self.cols, pady=10)
@@ -193,7 +199,8 @@ class SnakesAndLaddersGUI:
     # raghad 5554920
 
 
-# returning the number rolled from the dice
+''' Here since the dice randomization gives us a unicode letter which is the dice symbol, 
+    we are turning that symbol given to us into a numerical value and this is the core of our dice rolling method '''
 
     def get_number(self, x):
         if x == '\u2680':
