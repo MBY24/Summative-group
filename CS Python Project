@@ -94,21 +94,6 @@ def display_board(self):
 
 # 2290275, MOHAMED ALZAABI
 
-# Hussain's lovely comments
-
-'''
-
-Mohammad's and Raghad's code works perfectly fine, the problem is I need to merge my cell class and snakes and
-ladders generator functoin with his stuff, I still don't get how he presented everything without a board class, 
-or the is the GUI our board class in this case? I dunno. 
-
-Anyways, each square on our board should be an OBJECT if we want to implement graphs in our project, it's not gonna 
-be difficult, but we have to rewrite the whole numbers thing but by creating cell objects this time
-
-Yeah that' all
-
-'''
-
 
 def diceimage(self):
     # Create a frame for dice and roll button
@@ -287,7 +272,7 @@ if __name__ == "__main__":
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 
-# Hussain's lovely  5555154
+# Hussain's lovely code 5555154
 
 
 # helper function
@@ -383,38 +368,9 @@ values representing the end of them.
 """
 
 
-
-
-
 # Hussain's miserable attempt to implement graphs plz don't laugh
 
 # A cell is basically a square in the graph
-
-# I couldn't think of any way to implement graphs in our project except for this
-
-each
-sqaure in our
-grid is gonna
-be
-a
-cell
-object, a
-cell
-object
-has
-a
-number, and other
-properties
-showcasing
-the
-relationships
-with other cells, the cell might be the start of a ladder or a snake edge, or might be the end
-of
-a
-ladder or snake
-edge as well
-'''
-
 
 #implementing graphs
 
@@ -422,52 +378,8 @@ edge as well
 
 class Cell:
 
-    """
-A
-cell(a
-square in the
-board) Can
-have
-three
-properties
-only:
-1 - each
-cells
-has
-a
-number
-that
-'s gonna be displayed in the board while playing
-2 - A
-cell
-might(not necessarly)
-be
-the
-starting
-vertex
-of
-an
-edge
-representing
-a
-snake or a
-ladder
-3 - A
-cell
-might(also
-not necessarly) be
-the
-ending
-vertex
-of
-an
-edge
-representing
-either
-a
-snake or a
-ladder
-"""
+"Represents each square in the board" 
+
 
 def __init__(self, number):
     self.number = number
