@@ -5,6 +5,62 @@ from tkinter import Frame, Label, Button
 import random
 # Hussain and Mohammad 5555154 , 2290275
 
+# Hussain's miserable attempt to implement graphs plz don't laugh
+
+# A cell is basically a square in the graph
+
+#implementing graphs
+
+# a cell is like a vertex, and the the edge connecting to cells either forms a ladder or a snake
+
+class Cell:
+
+
+
+
+    def __init__(self, number):
+        self.number = number
+        self.start_of = []
+        self.end_of = []
+
+
+# To make this cell (vertex) the start of either a ladder or snake
+
+    def add_start(self, *cells):
+        for cell in cells:
+            self.start_of.append(cell)
+
+
+# To make this cell (vertex) the end of either a ladder or snake
+
+    def add_end(self, *cells):
+        for cell in cells:
+            self.end_of.append(cell)
+
+
+# Shows you all of the detials for the cell in more depth than just the number
+
+
+    def display_connections(self):
+        if (len(self.start_of) != 0 and len(self.end_of) != 0):
+            return "Cell number " + str(
+                self.number) + "\nis the of end of edges connecting cells with numbers: " + str(self.end_of) + "\nand the start of cells edges conncecting cells with numbers: " + str(
+                self.start_of)
+        elif (len(self.start_of) != 0):
+            return "Cell number " + str(self.number) +  "\nis only the start of edge connecting with numbers: " + str(self.start_of)
+        elif (len(self.end_of) != 0):
+            return "Cell number " + str(self.number) + "\nis only the end of edge connecting with numbers: " + str(
+                self.end_of)
+
+        else:
+            return ""
+
+
+# So that when you print the object, you only get the number in the board, to avoid confusion
+
+    def __str__(self):
+        return str(self.number)
+
 
 # 5518326 Field yang
 # MY PART :set up board size!
@@ -363,58 +419,4 @@ if __name__ == "__main__":
 
 
 
-# Hussain's miserable attempt to implement graphs plz don't laugh
 
-# A cell is basically a square in the graph
-
-#implementing graphs
-
-# a cell is like a vertex, and the the edge connecting to cells either forms a ladder or a snake
-
-class Cell:
-
-
-
-
-    def __init__(self, number):
-        self.number = number
-        self.start_of = []
-        self.end_of = []
-
-
-# To make this cell (vertex) the start of either a ladder or snake
-
-    def add_start(self, *cells):
-        for cell in cells:
-            self.start_of.append(cell)
-
-
-# To make this cell (vertex) the end of either a ladder or snake
-
-    def add_end(self, *cells):
-        for cell in cells:
-            self.end_of.append(cell)
-
-
-# Shows you all of the detials for the cell in more depth than just the number
-
-
-    def display_connections(self):
-        if (len(self.start_of) != 0 and len(self.end_of) != 0):
-            return "Cell number " + str(
-                self.number) + "\nis the of end of edges connecting cells with numbers: " + str(self.end_of) + "\nand the start of cells edges conncecting cells with numbers: " + str(
-                self.start_of)
-        elif (len(self.start_of) != 0):
-            return "Cell number " + str(self.number) +  "\nis only the start of edge connecting with numbers: " + str(self.start_of)
-        elif (len(self.end_of) != 0):
-            return "Cell number " + str(self.number) + "\nis only the end of edge connecting with numbers: " + str(
-                self.end_of)
-
-        else:
-            return ""
-
-
-# So that when you print the object, you only get the number in the board, to avoid confusion
-
-    def __str__(self):
-        return str(self.number)
