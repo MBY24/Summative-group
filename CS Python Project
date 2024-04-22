@@ -36,22 +36,22 @@ takes the number and the the start of and end of snakes and ladders
 '''
 
         self.number = number
-        self.start_of = []
-        self.end_of = []
+        self.snake_head = []
+        self.ladder_bottom = []
 
 
-# To make this cell (vertex) the start of either a ladder or snake
+# To make this cell (vertex) the start of a ladder
 
-    def add_start(self, *cells):
+    def add_ladder(self, *cells):
         for cell in cells:
-            self.start_of.append(cell)
+            self.snake_head.append(cell)
 
 
-# To make this cell (vertex) the end of either a ladder or snake
+# To make this cell (vertex) the end of a snake
 
-    def add_end(self, *cells):
+    def snake(self, *cells):
         for cell in cells:
-            self.end_of.append(cell)
+            self.ladder_bottom.append(cell)
 
 
 
