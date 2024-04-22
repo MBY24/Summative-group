@@ -353,6 +353,22 @@ number 23 (for example) to avoid this, I have created this function to make sure
             # if there are no common items, return 0
 
 
+    def print_snakes(snakes_dict): 
+
+        print(" SNAKES ")
+        print("        ") 
+        for key in snakes_dict:
+             print(str(key) + " ---- " + str(snakes_dict[key]))
+
+    def print_ladders(ladders_dict):
+
+        print(" LADDERS ")
+        print("         ")
+        for key in ladders_dict:
+             print(str(key) + " ---- " + str(snakes_dict[key]))
+      
+
+
     def generate_ladders(rows, cols , num_ladders):
 
 ''' generates random ladders specefied by the parameter, with the help of the 
