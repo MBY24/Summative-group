@@ -1,11 +1,22 @@
 import tkinter as tk
+'''
+This module serves as the Gui for our program, 
+it'll serve as the interface the users will interact with 
+'''
 # raghad 5554920
 from tkinter import Frame, Label, Button
+'''
+Importing the buttoms the frame and the labels to make the game 
+easy to understand and interact with 
+'''
 # raghad 5554920
 import random
+'''
+As a game of chance, this module is the base for 
+which the outcomes are generated 
+'''
 # Hussain and Mohammad 5555154 , 2290275
 
-# Hussain's miserable attempt to implement graphs plz don't laugh
 
 # A cell is basically a square in the graph
 
@@ -15,7 +26,15 @@ import random
 
 class Cell:
 
+'''
+A cell is a singular square in the game's board
+'''
+
     def __init__(self, number):
+'''
+takes the number and the the start of and end of snakes and ladders
+'''
+
         self.number = number
         self.start_of = []
         self.end_of = []
@@ -35,10 +54,16 @@ class Cell:
             self.end_of.append(cell)
 
 
-# Shows you all of the detials for the cell in more depth than just the number
 
 
     def display_connections(self):
+
+'''
+give all of the information about each cell, displays it's number, and connectoins 
+with other cells 
+'''
+
+
         if (len(self.start_of) != 0 and len(self.end_of) != 0):
             return "Cell number " + str(
                 self.number) + "\nis the of end of edges connecting cells with numbers: " + str(self.end_of) + "\nand the start of cells edges conncecting cells with numbers: " + str(
@@ -63,7 +88,19 @@ class Cell:
 # MY PART :set up board size!
 # Pass master,rows,cols,start,end.
 class SnakesAndLaddersGUI:
+
+''' 
+The core class of this project, it serves at the graphic user 
+interface for which the players will be interacting with and will see 
+their progress in the game, it hold many functions related to player movement, 
+random generation of snakes and ladders, and rolling the dice
+'''
+
     def __init__(self, master, rows, cols, start, end):
+'''
+Takes the dimentions of the grid
+
+
         self.master = master
         self.rows = rows
         self.cols = cols
@@ -76,6 +113,8 @@ class SnakesAndLaddersGUI:
         self.board = self.create_board()
         self.display_board()
         self.diceimage()
+        num_snakes = int(input("Enter the number of snakes for this round: "))
+        num_ladders = int(input("Enter the number of ladders for this round: "))
         self.snakes = {}
         self.ladders = {}
 
@@ -84,26 +123,12 @@ class SnakesAndLaddersGUI:
         #that's why this while loop insures no snake and ladder are exactly the same
 
         while (len(self.snakes) == 0 and len(self.ladders) == 0) or (len(self.snakes.items() & self.ladders.items()) != 0): 
-            self.snakes = generate_snakes(self, rows, cols, 4)
-            self.ladders = generate_ladders(self, rows, cols, 5)
+            self.snakes = generate_snakes(self, rows, cols, num_snakes)
+            self.ladders = generate_ladders(self, rows, cols, num_ladders)
 
     # Hussain and Yang 5555154 , 5518326
 
     # Generating a game board
-
-    '''
-    def create_board(self):
-        board = []
-        for i in range(self.rows):
-            row = []
-            for j in range(self.cols):
-                position = i * self.cols + j + 1
-                row.append(str(position))
-            if i % 2 == 1:
-                row = row[::-1]
-            board.extend(row)
-        return board
-    '''
 
 
 # All I did is replacing the normal numbers that we had in our board, with cells objects
@@ -176,6 +201,11 @@ class SnakesAndLaddersGUI:
 
 
     def roll_dice(self):
+
+''' 
+The action that the players will be making throughout the game, 
+the outcome is completely random and might give a sum between 1 and 12
+'''
 
     # shows the images of the numbers of the dice on gui
 
@@ -325,6 +355,10 @@ number 23 (for example) to avoid this, I have created this function to make sure
 
     def generate_ladders(rows, cols , num_ladders):
 
+''' generates random ladders specefied by the parameter, with the help of the 
+previoius function, it ensures that no two ladders are the same 
+'''
+
         length = rows * cols
 
         ladders_list = {}
@@ -357,6 +391,10 @@ number 23 (for example) to avoid this, I have created this function to make sure
 
 
     def generate_snakes(rows, cols, num_snakes):
+
+''' generates random snakes specefied by the parameter just like the ladder function , with the help of the 
+helper function, it ensures that no two snakes are the same as well 
+'''
         length = rows * cols
 
         snakes_list = {}
@@ -398,6 +436,13 @@ values representing the end of them.
 
 
 def main():
+
+''' 
+The main method of the program on which the game 
+will start and all functions and classes will be used 
+'''
+
+
     # Defines the number of rows, columns, start point, and end point of the game board
 
     rows = 10
@@ -406,10 +451,11 @@ def main():
     end = 91
 
     root = tk.Tk()
-    root.title("Snakes and Ladders")
+    root.title("! Snakes and Ladders !")
 
     # 2290275, MOHAMED ALZAABI - setting the size of the screen for tkinter GUI
-    root.geometry("650x800")
+    #root.geometry("650x800")
+     root.geometry("850x800")
     # 2290275, MOHAMED ALZAABI
 
     game_board = SnakesAndLaddersGUI(root, rows, cols, start, end)
